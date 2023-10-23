@@ -1,3 +1,4 @@
+import { Ruge_Boogie } from 'next/font/google/index'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -13,6 +14,9 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'primary': 'rgb(29, 155, 240)'
+      }
     },
   },
   plugins: [],
