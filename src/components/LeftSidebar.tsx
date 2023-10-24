@@ -1,7 +1,8 @@
 import { BiHomeCircle } from 'react-icons/bi'
 import { HiOutlineHashtag } from 'react-icons/hi'
-import { BsBell, BsBookmark, BsTwitter, BsEnvelope, BsThreeDots } from 'react-icons/bs'
+import { BsBell, BsBookmark, BsTwitter, BsEnvelope, BsThreeDots, BsPeople } from 'react-icons/bs'
 import { BiUser } from 'react-icons/bi'
+import { RiTwitterXFill, RiBook2Line } from 'react-icons/ri'
 import Link from 'next/link'
 
 const NAVIGATION_ITEMS = [
@@ -32,23 +33,41 @@ const NAVIGATION_ITEMS = [
     {
         title: 'Profile',
         icon: BiUser
+    },
+    {
+        title: 'Lists',
+        icon: RiBook2Line
+    },
+    {
+        title: 'Communities',
+        icon: BsPeople
+    },
+    {
+        title: 'Premium',
+        icon: RiTwitterXFill
+    },
+    {
+        title: 'More',
+        icon: BsThreeDots
     }
 ]
 
 const LeftSidebar = () => {
     return (
-        <section className="w-[275px] sticky top-0 flex flex-col items-stretch h-screen space-y-4 px-4">
+        <section className="w-[275px] sticky top-0 flex flex-col items-stretch h-screen px-4">
             <div className='flex flex-col items-stretch h-full space-y-4 my-4'>
                 {NAVIGATION_ITEMS.map(item => (
                     <Link
-                        className='hover:bg-white/20 text-xl transition duration-200 flex items-center justify-start w-fit space-x-3 rounded-full p-2'
+                        className='text-xl transition duration-200 flex items-center justify-start space-x-3 rounded-full p-2 hover:bg-neutral-800'
                         href={`/${item.title.toLowerCase()}`}
                         key={item.title}
                     >
-                        <div>
-                            <item.icon />
+                        <div className='flex items-center gap-x-5 pl-2'>
+                            <div>
+                                <item.icon className='text-2xl' />
+                            </div>
+                            {item.title !== 'Twitter' && <div>{item.title}</div>}
                         </div>
-                        {item.title !== 'Twitter' && <div>{item.title}</div>}
                     </Link>
                 ))}
                 <button className='rounded-full mr-6 bg-primary p-4 hover:bg-opacity-90 transition duration-200'>
@@ -68,7 +87,7 @@ const LeftSidebar = () => {
                 </div>
             </button>
         </section>
-  );
+    );
 }
 
 export default LeftSidebar;
