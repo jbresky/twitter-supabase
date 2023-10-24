@@ -4,7 +4,7 @@ import { IoStatsChart, IoShareOutline } from "react-icons/io5"
 
 const Feed = () => {
     return ( 
-        <main className="ml-[275px] mx-2 flex w-[600px] h-full min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
+        <main className="flex w-full h-full min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
         <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0">Home</h1>
         <div className="border-t-[0.5px] border-b-[0.5px] px-4 flex items-stretch py-4 space-x-2 border-gray-600 relative">
           <div className="w-10 h-10 bg-slate-400 rounded-full flex-none"></div>
