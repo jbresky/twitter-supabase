@@ -1,16 +1,45 @@
-import Feed from "@/components/Feed";
-import LeftSidebar from "@/components/LeftSidebar";
-import RightSection from "@/components/RightSection";
+import Feed from "@/components/feed";
+import LeftSidebar from "@/components/left-sidebar";
+import RightSection from "@/components/right-section";
+import { cookies } from 'next/headers'
+import { createServerClient } from "@supabase/ssr";
+import AuthModal from "@/components/auth-modal";
+import { AuthButtonServer } from "@/components/auth-button-server";
 
-const Home = () => {
+const Home = async () => {
+  const cookieStore = cookies()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string){
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+)
+
+  const { data, error } = await supabase.auth.getSession();
+  // console.log(error, data );
+  // console.log(userData);
+  
   return (
-    <div className="w-full max-w-[80vw] h-full m-auto flex justify-center items-center relative bg-black">
-      <div className="max-w-[70vw] w-full h-full flex relative">
-        <LeftSidebar />
+    <div className="w-full h-full m-auto flex justify-center items-center text-white relative bg-black">
+
+      <div className="lg:max-w-[70vw] w-full h-full flex relative">
+        <LeftSidebar session={data.session} />
         <Feed />
+        {/* {data.session !== null ? (
+          
+          <AuthModal />
+        ) : ''} */}
+
+      {/* @ts-expect-error Server Component */}
+        <AuthButtonServer/>
         <RightSection />
       </div>
-    </div>
+    </div> 
   );
 }
 
