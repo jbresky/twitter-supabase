@@ -1,9 +1,19 @@
+'use client'
+
 import { BiHomeCircle } from 'react-icons/bi'
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { BsBell, BsBookmark, BsTwitter, BsEnvelope, BsThreeDots, BsPeople } from 'react-icons/bs'
 import { BiUser } from 'react-icons/bi'
 import { RiTwitterXFill, RiBook2Line } from 'react-icons/ri'
 import Link from 'next/link'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
+import { type Session } from "@supabase/auth-helpers-nextjs"
+import { createBrowserClient } from '@supabase/ssr'
+import { useRouter } from 'next/navigation'
 
 const NAVIGATION_ITEMS = [
     {
@@ -52,7 +62,20 @@ const NAVIGATION_ITEMS = [
     }
 ]
 
-const LeftSidebar = () => {
+const LeftSidebar = ({ session }: { session: Session | null }) => {
+
+    const router = useRouter()
+
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut()
+        router.refresh()
+    }
+
     return (
         <section className="w-[275px] sticky top-0 flex flex-col items-stretch h-screen px-4">
             <div className='flex flex-col items-stretch h-full space-y-4 my-4'>
@@ -74,19 +97,50 @@ const LeftSidebar = () => {
                     Tweet
                 </button>
             </div>
-            <button className='flex items-center justify-between gap-x-2 bg-transparent p-4 hover:bg-white/20 transition duration-200 rounded-full'>
-                <div className='flex items-center gap-x-3'>
-                    <div className='rounded-full bg-slate-400 w-8 h-8'></div>
-                    <div className='text-left text-sx'>
-                        <div className='font-semibold'>Jbresky</div>
-                        <div>@jbreskydev</div>
+            <Popover>
+                <PopoverTrigger>
+                    <button className='flex w-full items-center justify-between gap-x-2 bg-transparent p-2 mb-2 hover:bg-white/20 transition duration-200 rounded-full'>
+                        <div className='flex items-center gap-x-3'>
+                            <div className='rounded-full bg-slate-400 w-8 h-8'></div>
+                            <div className='text-left text-sx'>
+                                <div className='font-semibold text-sm'>Jbresky</div>
+                                <div className='font-semibold text-sm'>@jbreskydev</div>
+                            </div>
+                        </div>
+                        <div>
+                            <BsThreeDots />
+                        </div>
+                    </button>
+                </PopoverTrigger>
+                <PopoverContent className='bg-black text-white text-sm font-bold w-full rounded-xl p-0'>
+                    <div>
+                        {session && session.user.email ?
+                            <>
+                                <div className='hover:bg-white/10 transition duration-200 p-4 cursor-pointer'>
+                                    <p>
+                                        Add an existing account
+                                    </p>
+                                    
+                                </div>
+                                <button
+                                    className='hover:bg-white/10 flex gap-2 p-4 rounded-b-xl cursor-pointer'
+                                    onClick={handleSignOut}
+                                >
+                                    <p className=''>
+                                        Log out
+                                    </p>
+                                    <p>
+                                        {session.user.email}
+                                    </p>
+                                </button>
+                            </>
+                            :
+                            null
+                        }
                     </div>
-                </div>
-                <div className=''>
-                    <BsThreeDots />
-                </div>
-            </button>
-        </section>
+                </PopoverContent>
+            </Popover>
+        </section >
     );
 }
 
