@@ -1,6 +1,6 @@
 'use client'
 
-import { PostgrestError } from "@supabase/supabase-js"
+// import { PostgrestError } from "@supabase/supabase-js"
 import { useRef } from 'react'
 import { toast } from "sonner"
 type FormClientProps = {
@@ -15,7 +15,7 @@ type FormClientProps = {
 }
 
 const FormTweet = ({ serverAction }: FormClientProps) => {
-    // const resetRef = useRef<HTMLButtonElement>(null)
+    const resetRef = useRef<HTMLButtonElement>(null)
 
     const submitTweet = async (data: any) => {
         try {
@@ -24,7 +24,7 @@ const FormTweet = ({ serverAction }: FormClientProps) => {
                 return toast.error(res.error.message)
             }
             toast.success("Tweet sent successfully")
-            // resetRef.current?.click();
+            resetRef.current?.click();
         } catch (error) {
             console.log(error);
         }
@@ -43,10 +43,10 @@ const FormTweet = ({ serverAction }: FormClientProps) => {
                     <button
                         className='rounded-full bg-primary px-4 py-2 w-full text-lg font-bold text-center hover:bg-opacity-90 transition duration-200'
                         type="submit"
-                        // ref={resetRef}
                     >
                         Tweet
                     </button>
+                    <button ref={resetRef} type='reset'></button>
                 </div>
             </div>
         </form>
