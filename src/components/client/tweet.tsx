@@ -1,3 +1,5 @@
+'use client'
+
 import { TweetType } from "@/lib/supabase/getTweets";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
