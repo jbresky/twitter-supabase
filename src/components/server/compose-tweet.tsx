@@ -2,6 +2,8 @@ import { createServerClient } from "@supabase/ssr";
 import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
 import { SupabaseClient } from "@supabase/supabase-js";
+import FormTweet from "../client/form-tweet";
+import { revalidatePath } from "next/cache";
 
 const ComposeTweet = () => {
     async function submitTweet(formData: FormData) {
@@ -36,7 +38,7 @@ const ComposeTweet = () => {
 
         if(userError){
             throw userError
-        } 
+        }
 
       const { data, error } =  await supabaseServer.from("tweets").insert({
             user_id: userData.user.id,
@@ -45,28 +47,13 @@ const ComposeTweet = () => {
         })
 
         console.log(data, error);
-    }
+        revalidatePath('/')
+        return { data, error}
+    } 
   
     return (
-        <form action={submitTweet} className="flex flex-col w-full h-full">
-            <input
-                className="bg-transparent outline-none border-b-[0.5px] border-dgray-600 p-4 text-xl placeholder:text-xl placeholder:text-gray-600 border-none w-full h-full"
-                placeholder="What's happening?"
-                name="tweet"
-            />
-            <div className="w-full justify-between items-center flex">
-                <div></div>
-                <div className="w-full max-w-[100px]">
-                    <button
-                        className='rounded-full bg-primary px-4 py-2 w-full text-lg font-bold text-center hover:bg-opacity-90 transition duration-200'
-                        type="submit"
-                    >
-                        Tweet
-                    </button>
-                </div>
-            </div>
-        </form>
+        <FormTweet serverAction={submitTweet}/>
     )
 }
 
-export default ComposeTweet
+export default ComposeTweet 
