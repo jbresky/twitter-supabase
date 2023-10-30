@@ -3,8 +3,8 @@ import LeftSidebar from "@/components/left-sidebar";
 import RightSection from "@/components/right-section";
 import { cookies } from 'next/headers'
 import { createServerClient } from "@supabase/ssr";
-import AuthModal from "@/components/auth-modal";
 import { AuthButtonServer } from "@/components/auth-button-server";
+import { Toaster } from "sonner";
 
 const Home = async () => {
   const cookieStore = cookies()
@@ -21,14 +21,15 @@ const Home = async () => {
 )
 
   const { data, error } = await supabase.auth.getSession();
-  // console.log(error, data );
-  // console.log(userData);
   
   return (
+    <>
+    <Toaster/>
     <div className="w-full h-full m-auto flex justify-center items-center text-white relative bg-black">
 
       <div className="lg:max-w-[70vw] w-full h-full flex relative">
         <LeftSidebar session={data.session} />
+      {/* @ts-expect-error Server Component */}
         <Feed />
         {/* {data.session !== null ? (
           
@@ -40,6 +41,7 @@ const Home = async () => {
         <RightSection />
       </div>
     </div> 
+    </>
   );
 }
 
