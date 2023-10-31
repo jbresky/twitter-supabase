@@ -5,6 +5,7 @@ import { cookies } from 'next/headers'
 import { createServerClient } from "@supabase/ssr";
 import { AuthButtonServer } from "@/components/auth-button-server";
 import { Toaster } from "sonner";
+import AuthModal from "@/components/auth-modal";
 
 const Home = async () => {
   const cookieStore = cookies()
@@ -31,13 +32,13 @@ const Home = async () => {
         <LeftSidebar session={data.session} />
       {/* @ts-expect-error Server Component */}
         <Feed />
-        {/* {data.session !== null ? (
+        {data.session !== null ? (
           
           <AuthModal />
-        ) : ''} */}
+        ) : ''}
 
       {/* @ts-expect-error Server Component */}
-        <AuthButtonServer/>
+        {/* <AuthButtonServer/> */}
         <RightSection />
       </div>
     </div> 

@@ -12,7 +12,7 @@ const AuthModal = () => {
     const [username, setUsername] = useState("")
     const [modal, setModal] = useState(true)
     const router = useRouter()
-    // const [fullName, setFullName] = useState("")
+    const [fullName, setFullName] = useState("")
 
     const supabase = createBrowserClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -45,7 +45,7 @@ const AuthModal = () => {
                                 options: {
                                     data: {
                                         username,
-                                        // full_name: fullName
+                                        full_name: fullName
                                     },
                                     emailRedirectTo: 'http://localhost:3000/auth/callback'
                                 }
@@ -71,13 +71,13 @@ const AuthModal = () => {
                             onChange={(e) => setUsername(e.target.value)}
                             className="my-2"
                         />
-                        {/* <Input
+                        <Input
                             type="text"
                             placeholder="your name"
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             className="my-2"
-                        /> */}
+                        />
                     <div className="flex justify-end">
                         <button type="submit" className="bg-white rounded-lg text-sm text-black font-bold p-2 hover:bg-white/80">
                             Login

@@ -1,13 +1,19 @@
 import ComposeTweet from "./server/compose-tweet"
 
-import getTweets from "@/lib/supabase/getTweets"
+import { getTweets } from "@/lib/supabase/queries"
 import Tweet from "./client/tweet";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 const Feed = async () => {
+  const supabaseClient = createServerComponentClient({
+    cookies
+  })
 
-  const res = await getTweets()
+  const { data: userData, error: userError } = await supabaseClient.auth.getUser()
 
-  const sortedTweets = res?.data?.reverse()
+  const res = await getTweets({ currentUserID: userData.user?.id })
+
 
   return (
     <main className="flex w-full max-w-[600px] h-full min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
@@ -17,11 +23,26 @@ const Feed = async () => {
         <ComposeTweet />
       </div>
       <div className="flex flex-col">
-        {res?.error && <div>Server error</div>}
-        {sortedTweets && sortedTweets.map(tweet => (
-          <Tweet key={tweet.id} tweet={tweet} />
-        ))
-        }
+        {res &&
+          res.map(({ likes, profile, tweet, hasLiked, replies }) => {
+            return (
+              <Tweet
+                key={tweet.id}
+                tweet={{
+                  tweetDetails: {
+                    ...tweet,
+                  },
+                  userProfile: {
+                    ...profile,
+                  },
+                }}
+                likesCount={likes.length}
+                currentUserId={userData.user?.id}
+                hasLiked={hasLiked}
+                repliesCount={replies.length}
+              />
+            )
+          })}
       </div>
     </main>
   );
