@@ -6,6 +6,7 @@ import { createServerClient } from "@supabase/ssr";
 import { AuthButtonServer } from "@/components/auth-button-server";
 import { Toaster } from "sonner";
 import AuthModal from "@/components/auth-modal";
+import LoginFooter from "@/components/login-footer";
 
 const Home = async () => {
   const cookieStore = cookies()
@@ -14,34 +15,36 @@ const Home = async () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        get(name: string){
+        get(name: string) {
           return cookieStore.get(name)?.value
         }
       }
     }
-)
+  )
 
   const { data, error } = await supabase.auth.getSession();
-  
+
   return (
     <>
-    <Toaster/>
-    <div className="w-full h-full m-auto flex justify-center items-center text-white relative bg-black">
+      <Toaster />
+      <div className="w-full h-full m-auto flex justify-center items-center text-white relative bg-black">
 
-      <div className="lg:max-w-[70vw] w-full h-full flex relative">
-        <LeftSidebar session={data.session} />
-      {/* @ts-expect-error Server Component */}
-        <Feed />
-        {data.session !== null ? (
-          
-          <AuthModal />
-        ) : ''}
+        <div className="w-full h-full flex">
+          <div className="overflow-visible">
+            <LeftSidebar session={data.session} />
+          </div>
+          {/* @ts-expect-error Server Component */}
+          <Feed />
 
-      {/* @ts-expect-error Server Component */}
-        {/* <AuthButtonServer/> */}
-        <RightSection />
+          {/* <AuthButtonServer/> */}
+          <RightSection />
+        </div>
       </div>
-    </div> 
+      {data.session === null ? (
+
+        // <AuthModal />
+        <LoginFooter />
+      ) : ''}
     </>
   );
 }
