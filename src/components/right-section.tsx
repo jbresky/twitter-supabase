@@ -1,8 +1,9 @@
+'use client'
 import { BsSearch } from "react-icons/bs";
 
 const RightSection = () => {
     return ( 
-        <section className="sticky top-2 xl:flex w-[380px] hidden mt-2 flex-col items-stretch h-screen px-6">
+        <section className="hidden lg:flex w-[380px] mt-2 flex-col items-stretch px-6">
         <div>
           <div className="relative w-full h-full group">
             <input id="searchBox"
@@ -14,15 +15,12 @@ const RightSection = () => {
             </label>
           </div>
         </div>
-        <div className="flex flex-col rounded-xl bg-neutral-800 mt-4 p-4 gap-y-2">
+        <div className="flex flex-col rounded-xl bg-neutral-900 mt-4 p-4 gap-y-2">
           <h3 className="font-bold text-xl">Subscribe to premium</h3>
           <p className="font-bold text-sm">Subscribe to unlock new features and if eligible, receive a share of ads revenue.</p>
-          {/* <button className='w-fit h-fit rounded-full bg-primary p-4 hover:bg-opacity-90 transition duration-200'>
-                Subscribe
-        </button> */}
           <button className="w-fit rounded-full px-4 py-2 bg-primary font-bold text-sm hover:bg-opacity-90 transition duration-200">Subscribe</button>
         </div>
-        <div className="flex flex-col rounded-xl bg-neutral-800 mt-4">
+        <div className="flex flex-col rounded-xl bg-neutral-900 mt-4">
           <h3 className="font-bold text-xl p-4">What&apos;s happening</h3>
           <div>
             {Array.from({ length: 5 }).map((_, i) => (
