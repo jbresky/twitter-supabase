@@ -2,11 +2,12 @@
 
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
-import { BsChat, BsDot, BsThreeDots } from "react-icons/bs"
-import { AiOutlineRetweet, AiOutlineHeart } from "react-icons/ai"
+import { BsDot, BsThreeDots } from "react-icons/bs"
+import { AiOutlineRetweet } from "react-icons/ai"
 import { IoStatsChart, IoShareOutline } from "react-icons/io5"
 import { Profile, Tweet } from "@/lib/db/schema";
 import LikeButton from "./like-button"
+import ReplyDialog from "../reply-dialog"
 
 dayjs.extend(relativeTime)
 
@@ -31,7 +32,7 @@ const Tweet = ({
     <>
       <div
         key={tweet.tweetDetails.id}
-        className="p-4 border-b-[0.5px] border-gray-600 flex space-x-4"
+        className="p-4 border-b-[0.5px] border-gray-600 flex gap-4"
       >
         <div>
           <div className="w-10 h-10 bg-slate-200 rounded-full" />
@@ -58,15 +59,8 @@ const Tweet = ({
           </div>
           {/* <div className="bg-slate-400 aspect-square w-full h-96 rounded-xl"></div> */}
           <div className="flex items-center w-full justify-between text-sm text-gray-400 pt-1">
-            <div className="flex space-x-2 items-center hover:text-blue-500 cursor-pointer"
-              onClick={() => {
-                // open dialog
-              }}
-            >
-              <BsChat />
-              <div>
-                {Math.floor(Math.random() * 1000) + 1}
-              </div>
+            <div className="flex space-x-2 items-center hover:text-blue-500 cursor-pointer">
+              <ReplyDialog tweet={tweet} repliesCount={repliesCount} />
             </div>
             <div className="flex space-x-2 items-center hover:text-green-500 cursor-pointer">
               <AiOutlineRetweet />
@@ -75,7 +69,6 @@ const Tweet = ({
               </div>
             </div>
             <div className="flex space-x-2 items-center hover:text-red-500 cursor-pointer">
-              {/* <AiOutlineHeart /> */}
               <LikeButton
                 tweetId={tweet.tweetDetails.id!}
                 likesCount={likesCount}
