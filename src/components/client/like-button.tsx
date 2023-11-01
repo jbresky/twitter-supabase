@@ -2,7 +2,7 @@
 
 import { likeTweet, unlikeTweet } from "@/lib/supabase/mutation";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
-import { useState, useTransition } from "react";
+import { useTransition } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { toast } from "sonner";
 
@@ -18,7 +18,6 @@ const LikeButton = ({
     isUserHasLiked
 }: LikeButtonProps) => {
     let [isLikePending, startTransition] = useTransition()
-    // const [supabase] = useState(() => createPagesBrowserClient())
     const supabase = createPagesBrowserClient()
     return (
         <button
@@ -48,7 +47,7 @@ const LikeButton = ({
                         toast.error("authentication failed");
                     });
             }}
-            className="rounded-full flex items-center space-x-2 hover:bg-white/10 transition duration-200 p-3 cursor-pointer"
+            className="rounded-full flex items-center space-x-2 transition duration-200 p-3 cursor-pointer"
         >
             {isUserHasLiked ? (
                 <AiFillHeart className="w-5 h-5 text-red-600" />
