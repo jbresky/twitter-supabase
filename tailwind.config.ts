@@ -17,6 +17,7 @@ export = {
     }, 
     extend: {
       colors: {
+        login: 'rgb(29, 155, 240)',
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
