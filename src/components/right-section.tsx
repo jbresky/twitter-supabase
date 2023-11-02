@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 
 const RightSection = () => {
     return ( 
-        <section className="hidden lg:flex w-[380px] mt-2 flex-col items-stretch px-6">
+        <section className="hidden lg:flex w-[380px] mt-2 flex-col items-stretch px-6 shrink">
         <div>
           <div className="relative w-full h-full group">
             <input id="searchBox"
@@ -31,10 +31,10 @@ const RightSection = () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col rounded-xl bg-neutral-800 my-4">
+        <div className="flex flex-col rounded-xl bg-neutral-900 my-4">
           <h3 className="font-bold text-xl px-4 pb-2 pt-3">Who to follow</h3>
           <div>
-            {Array.from({ length: 4 }).map((_, i) => (
+            {Array.from({ length: 3}).map((_, i) => (
               <div key={i} className="hover:bg-white/10 transition duration-200 p-4 cursor-pointer last:rounded-b-xl flex justify-between items-center gap-x-2">
                 <div className="flex gap-x-3">
                   <div className="w-10 h-10 bg-blue-300 rounded-full"></div>
