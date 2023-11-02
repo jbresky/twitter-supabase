@@ -95,8 +95,8 @@ const Login = () => {
                     </div>
                 </div>
                 <footer className='flex justify-center gap-4 bg-black text-gray-500 text-[13px] p-4'>
-                    {footer.map(item => (
-                        <Link className='cursor-pointer hover:underline' href={`/${item.title.toLowerCase().replace(/ /g, '-')}`}>
+                    {footer.map((item, index) => (
+                        <Link key={index} className='cursor-pointer hover:underline' href={`/${item.title.toLowerCase().replace(/ /g, '-')}`}>
                         <span>{item.title}</span>
                         </Link>
                     ))}
