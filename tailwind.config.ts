@@ -11,11 +11,12 @@ export = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
     }, 
     extend: {
+        screens: {
+        "xsm": "500px",
+        "2xl": "1400px",
+      },
       colors: {
         login: 'rgb(29, 155, 240)',
         border: "hsl(var(--border))",
