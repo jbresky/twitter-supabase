@@ -2,7 +2,7 @@
 
 const LoginFooter = () => {
     return (
-        <div className="h-16 bg-login text-white flex justify-around items-center fixed bottom-0 w-full">
+        <div className="h-16 hidden bg-login text-white justify-around items-center fixed bottom-0 w-full">
             <div className="hidden md:flex flex-col">
                 <div className="font-bold text-xl">Don&apos;t miss what&apos;s happening</div>
                 <div className="text-sm">People on X are the first to know.</div>
