@@ -47,7 +47,7 @@ const LikeButton = ({
                         toast.error("authentication failed");
                     });
             }}
-            className="rounded-full flex items-center space-x-2 transition duration-200 p-3 cursor-pointer"
+            className="rounded-full flex items-center transition duration-200 cursor-pointer"
         >
             {isUserHasLiked ? (
                 <AiFillHeart className="w-5 h-5 text-red-600" />
