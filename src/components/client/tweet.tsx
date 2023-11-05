@@ -8,6 +8,7 @@ import { IoStatsChart, IoShareOutline } from "react-icons/io5"
 import { Profile, Tweet } from "@/lib/db/schema";
 import LikeButton from "./like-button"
 import ReplyDialog from "../reply-dialog"
+import { useRouter } from "next/navigation"
 
 dayjs.extend(relativeTime)
 
@@ -28,6 +29,8 @@ const Tweet = ({
   hasLiked,
   repliesCount,
 }: TweetProps) => {
+
+  const router = useRouter()
   return (
     <>
       <div
@@ -60,7 +63,11 @@ const Tweet = ({
             </div>
           </div>
 
-          <div className="text-white text-base">
+          <div className="text-white text-base"
+            onClick={() => {
+              router.push(`/tweet/${tweet.tweetDetails.id}`)
+            }}
+          >
             {tweet.tweetDetails.text}
           </div>
 
