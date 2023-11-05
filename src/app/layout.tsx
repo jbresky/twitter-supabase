@@ -1,3 +1,5 @@
+import LeftSidebar from '@/components/left-sidebar'
+import RightSection from '@/components/right-section'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -16,7 +18,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className="w-full h-full flex justify-center bg-black text-white">
+          {/* @ts-expect-error Server Component */}
+          <LeftSidebar />
+          {children}
+          <RightSection />
+        </div>
+      </body>
     </html>
   )
 }
