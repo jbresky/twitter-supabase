@@ -35,7 +35,7 @@ const Tweet = ({
     <>
       <div
         key={tweet.tweetDetails.id}
-        className="w-full py-3 px-3 border-b-[0.5px] border-gray-600 flex gap-3"
+        className="w-full py-3 px-3 border-b-[0.5px] border-gray-600 flex gap-3 cursor-pointer"
       >
         <div>
           <div className="w-10 h-10 bg-slate-200 rounded-full" />
@@ -63,7 +63,7 @@ const Tweet = ({
             </div>
           </div>
 
-          <div className="text-white text-base"
+          <div className="w-full text-base"
             onClick={() => {
               router.push(`/tweet/${tweet.tweetDetails.id}`)
             }}
