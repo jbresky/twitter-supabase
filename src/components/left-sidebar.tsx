@@ -61,7 +61,7 @@ const NAVIGATION_ITEMS = [
     },
 ]
 
-const LeftSidebar = async ({ session }: { session: Session | null } ) => {
+const LeftSidebar = async () => {
 
     // const router = useRouter()
     const cookieStore = cookies()
@@ -78,6 +78,7 @@ const LeftSidebar = async ({ session }: { session: Session | null } ) => {
         }
     )
 
+    const { data: sessionData } = await supabaseServer.auth.getSession();
     const {data: userData} = await supabaseServer.auth.getUser()
 
     // const handleSignOut = async () => {
@@ -86,7 +87,7 @@ const LeftSidebar = async ({ session }: { session: Session | null } ) => {
     // }
 
     return (
-        <section className="2xl:w-[275px] h-screen xsm:flex flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto hidden">
+        <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto hidden">
             <div className='w-full flex flex-col items-stretch h-full space-y-4 my-4'>
                 {NAVIGATION_ITEMS.map(item => (
                     <Link
@@ -106,7 +107,7 @@ const LeftSidebar = async ({ session }: { session: Session | null } ) => {
                     Tweet
                 </button>
             </div>
-            {session && session.user.email ? (
+            {sessionData && sessionData?.session?.user.email ? (
                 <Popover>
                     <PopoverTrigger className='py-2 w-full'>
                         <div className='hidden 2xl:flex items-center justify-between gap-x-2 bg-transparent p-2 mb-2 hover:bg-neutral-900 transition duration-200 rounded-full'>
