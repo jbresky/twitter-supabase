@@ -14,6 +14,7 @@ export = {
     }, 
     extend: {
         screens: {
+        "2xsm": "340px",
         "xsm": "500px",
         "2xl": "1400px",
       },

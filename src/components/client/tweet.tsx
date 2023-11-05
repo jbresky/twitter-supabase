@@ -42,18 +42,20 @@ const Tweet = ({
 
           <div className="w-full flex items-center justify-between">
 
-            <div className="flex items-center">
+            <div className="flex items-center max-2xsm:flex-col max-sm:items-start">
               <p className="font-bold hover:underline cursor-pointer pr-1">{tweet.userProfile.fullName ?? ""}</p>
-              <p className="text-gray-500">@{tweet.userProfile.username}</p>
-              <p className="text-gray-500">
-                <BsDot />
-              </p>
-              <p className="text-gray-500">
-                {dayjs(tweet.tweetDetails.createdAt).fromNow()}
-              </p>
+              <div className="flex items-center">
+                <p className="text-gray-500">@{tweet.userProfile.username}</p>
+                <p className="text-gray-500">
+                  <BsDot />
+                </p>
+                <p className="text-gray-500">
+                  {dayjs(tweet.tweetDetails.createdAt).fromNow()}
+                </p>
+              </div>
             </div>
 
-            <div className="hover:text-blue-500 cursor-pointer">
+            <div className="hover:text-blue-500 cursor-pointer max-2xsm:self-start">
               <BsThreeDots />
             </div>
           </div>
