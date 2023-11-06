@@ -7,7 +7,11 @@ import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db/index";
 import { tweets } from "@/lib/db/schema";
 
-const ComposeTweet = () => {
+interface IComposeTweet {
+    placeholder?: string
+}
+
+const ComposeTweet = ({ placeholder }: IComposeTweet) => {
     async function submitTweet(formData: FormData) {
         'use server';
 
@@ -60,7 +64,7 @@ const ComposeTweet = () => {
     }
 
     return (
-        <FormTweet serverAction={submitTweet} />
+        <FormTweet serverAction={submitTweet} placeholder={placeholder} />
     )
 }
 
