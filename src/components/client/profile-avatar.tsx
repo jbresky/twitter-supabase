@@ -11,12 +11,14 @@ type ProfileAvatarProps = {
   username?: string;
   avatarUrl?: string | null;
   isOnTimeline?: boolean;
+  width?: string;
 };
 
 const ProfileAvatar = ({
   username,
   avatarUrl,
   isOnTimeline = false,
+  width
 }: ProfileAvatarProps) => {
   const [profileImage, setProfileImage] = useState("");
 
@@ -86,12 +88,12 @@ const ProfileAvatar = ({
           htmlFor={isOnTimeline ? "" : "user-avatar"}
           className={!isOnTimeline ? "cursor-pointer" : ""}
         >
-          <Avatar>
+          <Avatar className={width || "w-10 h-10"}>
             {profileImage !== "" ? (
               <AvatarImage
                 src={profileImage}
                 alt={`@${username}`}
-                className="object-cover bg-center"
+                className="object-cover bg-center"  
               />
             ) : (
               <AvatarImage
@@ -100,9 +102,9 @@ const ProfileAvatar = ({
                 className="object-cover bg-center"
               />
             )}
-            <AvatarFallback>
+            <AvatarFallback className="text-black font-semibold">
               {username
-                ? `${username[0]} ${username[username.length - 1]}`
+                ? `${username[0]}${username[1]}`
                 : ""}
             </AvatarFallback>
           </Avatar>
