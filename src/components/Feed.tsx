@@ -1,11 +1,11 @@
 import ComposeTweet from "./server/compose-tweet"
 import Tweet from "./client/tweet";
-import AuthModal from "./client/login-modal";
 import { getTweets } from "@/lib/supabase/queries"
 import { createServerComponentClient, Session } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { RiTwitterXFill } from 'react-icons/ri'
 import { AiOutlineSetting } from 'react-icons/ai'
+import LoginModal from "./client/login-modal";
 
 const Feed = async ({session}: {session: Session}) => {
   const supabaseClient = createServerComponentClient({
@@ -37,7 +37,7 @@ const Feed = async ({session}: {session: Session}) => {
           <div className="flex items-center justify-end gap-8 w-full">
             <h1>Login to tweet</h1>
             <div>
-              <AuthModal />
+              <LoginModal />
             </div>
           </div>
         )}

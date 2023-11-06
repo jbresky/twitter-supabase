@@ -1,6 +1,6 @@
 'use client'
 
-import AuthModal from "./login-modal";
+import LoginModal from "./login-modal";
 
 const LoginFooter = () => {
     return (
@@ -11,7 +11,7 @@ const LoginFooter = () => {
             </div>
             <div className="flex gap-4 justify-center">
                 {/* <button className="w-[40vw] md:w-fit px-4 rounded-full font-semibold border-white border-[1px]">Log in</button> */}
-                <AuthModal classname="w-[40vw] md:w-fit px-4 py-2 rounded-full font-semibold border-white border-[1px] cursor-pointer" />
+                <LoginModal classname="w-[40vw] md:w-fit px-4 py-2 rounded-full font-semibold border-white border-[1px] cursor-pointer" />
                 <button className="w-[40vw] md:w-fit px-4 py-2 rounded-full font-semibold text-black bg-white hover:opacity-90">Sign up</button>
             </div>
         </div>

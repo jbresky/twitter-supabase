@@ -8,12 +8,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import AuthButton from "./auth-button";
 import { DialogTrigger } from "@radix-ui/react-dialog";
+import { X } from "lucide-react";
 
-interface AuthModalProp {
+interface LoginModalProp {
     classname?: string
 }
 
-const AuthModal = ({ classname }: AuthModalProp) => {
+const LoginModal = ({ classname }: LoginModalProp) => {
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [isModalgOpen, setIsModalOpen] = useState(false)
@@ -33,7 +34,7 @@ const AuthModal = ({ classname }: AuthModalProp) => {
                         Log in
                     </div>
                 </DialogTrigger>
-                <DialogContent className="p-10 space-y-4 m-auto bg-black top-[50%] border-none">
+                <DialogContent className="p-10 space-y-4 m-auto bg-black top-[50%] border-none text-white">
                     <div className="w-[75%] m-auto">
                         <div className="flex flex-col items-start w-full gap-4">
                             <h3 className="text-white text-3xl">Sign in to X</h3>
@@ -109,4 +110,4 @@ const AuthModal = ({ classname }: AuthModalProp) => {
     );
 }
 
-export default AuthModal;
+export default LoginModal;
