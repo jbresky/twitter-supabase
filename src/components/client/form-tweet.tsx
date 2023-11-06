@@ -3,10 +3,11 @@
 import { useRef } from 'react'
 import { toast } from "sonner"
 type FormClientProps = {
-    serverAction: any
+    serverAction: any,
+    placeholder?: string
 }
 
-const FormTweet = ({ serverAction }: FormClientProps) => {
+const FormTweet = ({ serverAction, placeholder }: FormClientProps) => {
     const resetRef = useRef<HTMLButtonElement>(null)
 
     const submitTweet = async (data: any) => {
@@ -23,10 +24,10 @@ const FormTweet = ({ serverAction }: FormClientProps) => {
     }
 
     return (
-        <form action={submitTweet} className="flex flex-col w-full h-full">
+        <form action={submitTweet} className="flex flex-col w-full">
             <input
-                className="bg-transparent outline-none border-b-[0.5px] border-dgray-600 p-4 text-xl placeholder:text-xl placeholder:text-gray-600 border-none w-full h-full"
-                placeholder="What's happening?"
+                className="bg-transparent outline-none border-b-[0.5px] border-gray-600 p-4 text-xl placeholder:text-xl placeholder:text-gray-600 border-none w-full h-full"
+                placeholder={placeholder || "What's happening?"} 
                 name="tweet"
             />
             <div className="w-full justify-between items-center flex">

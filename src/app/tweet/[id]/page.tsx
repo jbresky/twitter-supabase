@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { getTweets } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 import { BsArrowLeft } from 'react-icons/bs'
-import Tweet from "@/components/client/tweet";
+import Tweet from "../tweet";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
   const supabaseClient = createServerComponentClient({

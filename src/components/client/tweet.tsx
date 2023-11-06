@@ -7,9 +7,9 @@ import { AiOutlineRetweet } from "react-icons/ai"
 import { IoStatsChart, IoShareOutline } from "react-icons/io5"
 import { Profile, Tweet } from "@/lib/db/schema";
 import LikeButton from "./like-button"
-import ReplyDialog from "../reply-dialog"
 import { useRouter } from "next/navigation"
 import ProfileAvatar from "./profile-avatar"
+import ReplyDialog from "./reply-dialog"
 
 dayjs.extend(relativeTime)
 

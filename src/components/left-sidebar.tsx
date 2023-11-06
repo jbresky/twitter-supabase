@@ -15,10 +15,10 @@ import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 const NAVIGATION_ITEMS = [
-    {
-        title: 'Twitter',
-        icon: RiTwitterXFill
-    },
+    // {
+    //     title: 'Twitter',
+    //     icon: RiTwitterXFill
+    // },
     {
         title: 'Home',
         icon: GoHomeFill
@@ -70,16 +70,16 @@ const LeftSidebar = async () => {
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
         {
-          cookies: {
-            get(name: string) {
-              return cookieStore.get(name)?.value
+            cookies: {
+                get(name: string) {
+                    return cookieStore.get(name)?.value
+                }
             }
-          }
         }
     )
 
     const { data: sessionData } = await supabaseServer.auth.getSession();
-    const {data: userData} = await supabaseServer.auth.getUser()
+    const { data: userData } = await supabaseServer.auth.getUser()
 
     // const handleSignOut = async () => {
     //     await supabase.auth.signOut()
@@ -89,6 +89,13 @@ const LeftSidebar = async () => {
     return (
         <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto hidden">
             <div className='w-full flex flex-col items-stretch h-full space-y-4 my-4'>
+                <Link
+                    className='text-xl w-full transition duration-200 flex items-center justify-center py-2 px-4 rounded-full hover:bg-neutral-900'
+                    href='/'
+                    key='twitter logo'
+                >
+                    <RiTwitterXFill />
+                </Link>
                 {NAVIGATION_ITEMS.map(item => (
                     <Link
                         className='text-xl w-full transition duration-200 flex items-center justify-start group'
@@ -134,7 +141,7 @@ const LeftSidebar = async () => {
                                 </div>
                                 <div
                                     className='hover:bg-white/10 flex gap-2 p-4 rounded-b-xl cursor-pointer'
-                                    // onClick={handleSignOut}
+                                // onClick={handleSignOut}
                                 >
                                     <p className=''>
                                         Log out

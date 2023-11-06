@@ -1,13 +1,13 @@
 import ComposeTweet from "./server/compose-tweet"
 import Tweet from "./client/tweet";
-import AuthModal from "./login-modal";
+import AuthModal from "./client/login-modal";
 import { getTweets } from "@/lib/supabase/queries"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient, Session } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { RiTwitterXFill } from 'react-icons/ri'
 import { AiOutlineSetting } from 'react-icons/ai'
 
-const Feed = async () => {
+const Feed = async ({session}: {session: Session}) => {
   const supabaseClient = createServerComponentClient({
     cookies
   })
@@ -28,7 +28,7 @@ const Feed = async () => {
 
       <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0">Home</h1>
       <div className="border-t-[0.5px] border-b-[0.5px] px-4 flex items-stretch py-4 space-x-2 border-gray-600 relative">
-        {userData.user ? (
+        {session ? (
           <>
             <div className="w-10 h-10 bg-slate-400 rounded-full flex-none"></div>
             <ComposeTweet />
