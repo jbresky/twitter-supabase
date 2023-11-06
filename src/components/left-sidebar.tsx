@@ -87,7 +87,7 @@ const LeftSidebar = async () => {
     // }
 
     return (
-        <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto hidden">
+        <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto overflow-x-hidden hidden">
             <div className='w-full flex flex-col items-stretch h-full space-y-4 my-4'>
                 <Link
                     className='text-xl w-full transition duration-200 flex items-center justify-center py-2 px-4 rounded-full hover:bg-neutral-900'
