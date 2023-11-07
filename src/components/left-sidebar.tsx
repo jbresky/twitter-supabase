@@ -9,10 +9,8 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import { type Session } from "@supabase/auth-helpers-nextjs"
-import { createServerClient } from '@supabase/ssr'
+// import { createServerClient } from '@supabase/ssr'
 // import { useRouter } from 'next/navigation'
-import { cookies } from 'next/headers'
 
 const NAVIGATION_ITEMS = [
     // {
@@ -64,22 +62,22 @@ const NAVIGATION_ITEMS = [
 const LeftSidebar = async () => {
 
     // const router = useRouter()
-    const cookieStore = cookies()
+    // const cookieStore = cookies()
 
-    const supabaseServer = createServerClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        {
-            cookies: {
-                get(name: string) {
-                    return cookieStore.get(name)?.value
-                }
-            }
-        }
-    )
+    // const supabaseServer = createServerClient(
+    //     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    //     {
+    //         cookies: {
+    //             get(name: string) {
+    //                 return cookieStore.get(name)?.value
+    //             }
+    //         }
+    //     }
+    // )
 
-    const { data: sessionData } = await supabaseServer.auth.getSession();
-    const { data: userData } = await supabaseServer.auth.getUser()
+    // const { data: sessionData } = await supabaseServer.auth.getSession();
+    // const { data: userData } = await supabaseServer.auth.getUser()
 
     // const handleSignOut = async () => {
     //     await supabase.auth.signOut()
@@ -114,7 +112,7 @@ const LeftSidebar = async () => {
                     Tweet
                 </button>
             </div>
-            {sessionData && sessionData?.session?.user.email ? (
+            {/* {sessionData && sessionData?.session?.user.email ? (
                 <Popover>
                     <PopoverTrigger className='py-2 w-full'>
                         <div className='hidden 2xl:flex items-center justify-between gap-x-2 bg-transparent p-2 mb-2 hover:bg-neutral-900 transition duration-200 rounded-full'>
@@ -155,7 +153,7 @@ const LeftSidebar = async () => {
                         </div>
                     </PopoverContent>
                 </Popover>
-            ) : null}
+            ) : null} */}
         </section >
     );
 }
