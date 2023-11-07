@@ -31,14 +31,14 @@ const Feed = async () => {
   return (
     <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
       {/* mobile header */}
-      <header className="h-14 w-full flex justify-between items-center md:hidden border-b-1 border-gray-500 p-4">
+      <header className="h-14 w-full flex justify-between items-center md:hidden border-b-1 border-gray-500 p-4 z-10">
         <div className="w-8 h-8 bg-slate-200 rounded-full" />
         <RiTwitterXFill className="text-2xl" />
         <AiOutlineSetting className="text-xl" />
       </header>
       {/* mobile header */}
 
-      <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0">Home</h1>
+      <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0 z-10">Home</h1>
       <div className="border-t-[0.5px] border-b-[0.5px] px-4 flex items-stretch py-4 space-x-2 border-gray-600 relative">
         {data.session && data.session.user.email ? (
           <>
