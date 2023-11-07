@@ -20,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="w-full h-full flex justify-center bg-black text-white">
-          {/* @ts-expect-error Server Component */}
           <LeftSidebar />
           {children}
           <RightSection />

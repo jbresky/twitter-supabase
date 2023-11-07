@@ -1,3 +1,5 @@
+'use client'
+
 import { HiOutlineHashtag } from 'react-icons/hi'
 import { BsBell, BsBookmark, BsTwitter, BsEnvelope, BsThreeDots, BsPeople } from 'react-icons/bs'
 import { BiUser } from 'react-icons/bi'
@@ -59,7 +61,7 @@ const NAVIGATION_ITEMS = [
     },
 ]
 
-const LeftSidebar = async () => {
+const LeftSidebar = () => {
 
     // const router = useRouter()
     // const cookieStore = cookies()
