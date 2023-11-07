@@ -1,11 +1,11 @@
 // import ComposeTweet from "./server/compose-tweet"
 // import Tweet from "./client/tweet";
 // import { getTweets } from "@/lib/supabase/queries"
+// import { createServerClient } from "@supabase/ssr";
 // import { cookies } from "next/headers";
 // import { RiTwitterXFill } from 'react-icons/ri'
 // import { AiOutlineSetting } from 'react-icons/ai'
 // import LoginModal from "./client/login-modal";
-// import { createServerClient } from "@supabase/ssr";
 
 const Feed = async () => {
   // const cookieStore = cookies()
