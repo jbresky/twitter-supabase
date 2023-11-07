@@ -1,6 +1,5 @@
 'use server'
 
-import { Database } from "../supabase.types";
 import { supabaseServer } from ".";
 import { db } from "../db";
 import {
@@ -14,7 +13,6 @@ import {
 } from "../db/schema";
 import { eq, exists, and, desc } from "drizzle-orm";
 
-// puedo definirlo en types
 interface TweetProps {
   currentUserID?: string;
   getSingleTweetId?: string;
@@ -141,7 +139,6 @@ export const getTweets = async ({
     }
   } catch (error) {
     console.log(error);
-    // return { error: "something wrong with querying the db" };
   }
 };
 
