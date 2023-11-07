@@ -1,18 +1,30 @@
 import ComposeTweet from "./server/compose-tweet"
 import Tweet from "./client/tweet";
 import { getTweets } from "@/lib/supabase/queries"
-import { createServerComponentClient, Session } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { RiTwitterXFill } from 'react-icons/ri'
 import { AiOutlineSetting } from 'react-icons/ai'
 import LoginModal from "./client/login-modal";
+import { createServerClient } from "@supabase/ssr";
 
-const Feed = async ({session}: {session: Session}) => {
-  const supabaseClient = createServerComponentClient({
-    cookies
-  })
+const Feed = async () => {
+  const cookieStore = cookies()
 
-  const { data: userData, error: userError } = await supabaseClient.auth.getUser()
+  const supabaseServer = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+  )
+
+  const { data } = await supabaseServer.auth.getSession();
+
+  const { data: userData } = await supabaseServer.auth.getUser()
 
   const res = await getTweets({ currentUserID: userData.user?.id })
 
@@ -28,7 +40,7 @@ const Feed = async ({session}: {session: Session}) => {
 
       <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0">Home</h1>
       <div className="border-t-[0.5px] border-b-[0.5px] px-4 flex items-stretch py-4 space-x-2 border-gray-600 relative">
-        {session ? (
+        {data.session && data.session.user.email ? (
           <>
             <div className="w-10 h-10 bg-slate-400 rounded-full flex-none"></div>
             <ComposeTweet />
