@@ -1,10 +1,10 @@
-'use client'
-
 import { RiTwitterXFill } from 'react-icons/ri'
-import { AiFillApple } from 'react-icons/ai'
-import { FcGoogle } from 'react-icons/fc'
 import Link from 'next/link'
 import AuthButton from '@/components/client/auth-button'
+import LoginModal from '@/components/client/login-modal'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 const footer = [
     {
@@ -31,23 +31,26 @@ const footer = [
         title: 'Blog'
     }, {
         title: 'Status'
-    }, 
+    },
     {
         title: 'X for Business'
     }, {
         title: 'Developers'
     }, {
         title: 'Directory'
-    },
-    // {
-    //     title: 'Settings'
-    // },
-    // {
-    //     title: '@ 2023 X Corp.'
-    // },
+    }
 ]
 
-const Login = () => {
+const Login = async () => {
+
+    const supabase = createServerComponentClient({ cookies })
+
+    const { data: { session } } = await supabase.auth.getSession()
+  
+    if (session !== null) {
+      redirect('/')
+    }
+
     return (
         <>
             <div className="flex flex-col bg-black m-auto sm:h-[100vh]">
@@ -65,13 +68,8 @@ const Login = () => {
                                 <p>or</p>
                                 <div className='w-full border-2-white h-[1px] bg-gray-700'></div>
                             </div>
-                            <div className='w-full flex flex-col gap-1'>
-                                <button className='w-full bg-primary text-white py-3 px-4 rounded-full text-sm font-semibold'>
-                                    Create account
-                                </button>
-                                <div className='text-[11px] py-1 text-gray-400'>By signing up, you agree to the
-                                    <span className='text-primary cursor-pointer'> Terms of Service</span> and <span className='text-primary cursor-pointer'> Privacy Policy</span>, including <span className='text-primary cursor-pointer'> Cookie Use</span>.</div>
-                            </div>
+                            <div className='pb-4 text-sm text-gray-300'>Please provide a valid email address below as a confirmation link will be sent for authentication</div>
+                            <LoginModal />
                             <div className='w-full flex flex-col gap-4'>
                                 <h3 className='font-semibold text-lg'>Already have an account?</h3>
                                 <button className='w-full text-primary border-2 border-gray-500 py-3 px-4 rounded-full text-sm font-semibold'>
@@ -81,7 +79,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <footer className='flex flex-wrap justify-center max-md:gap-1 leading-4 gap-2 bg-black text-gray-500 text-[12px] p-2'>
+                <footer className='flex flex-wrap justify-center max-md:gap-1  gap-2 bg-black text-gray-500 text-[12px] p-2'>
                     {footer.map((item, index) => (
                         <Link key={index} className='cursor-pointer hover:underline' href={`/${item.title.toLowerCase().replace(/ /g, '-')}`}>
                             <span>{item.title}</span>

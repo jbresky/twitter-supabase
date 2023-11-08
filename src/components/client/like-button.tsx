@@ -50,16 +50,11 @@ const LikeButton = ({
             className="rounded-full flex items-center space-x-2 transition duration-200 cursor-pointer"
         >
             {isUserHasLiked ? (
-                <>
-                    <AiFillHeart className="text-[#f91880] w-4 h-4" />
-                    <span className="text-sm text-[#f91880]">{likesCount == 0 ? '' : likesCount}</span>
-                </>
+                <AiFillHeart className="text-[#f91880] w-4 h-4" />
             ) : (
-                <>
-                    <AiOutlineHeart className="w-5 h-5" />
-                    <span className="text-sm">{likesCount == 0 ? '' : likesCount}</span>
-                </>
+                <AiOutlineHeart className="w-5 h-5" />
             )}
+            <span className="text-sm">{likesCount == 0 ? '' : likesCount}</span>
         </button>
     );
 }

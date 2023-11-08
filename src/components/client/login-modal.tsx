@@ -1,42 +1,42 @@
 'use client'
 
 import { Dialog, DialogContent } from "../ui/dialog";
-import { createBrowserClient } from "@supabase/ssr"
 import { useState } from "react";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import AuthButton from "./auth-button";
 import { DialogTrigger } from "@radix-ui/react-dialog";
-import { X } from "lucide-react";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-interface LoginModalProp {
-    classname?: string
-}
-
-const LoginModal = ({ classname }: LoginModalProp) => {
+const LoginModal = () => {
     const [email, setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [isModalgOpen, setIsModalOpen] = useState(false)
     const router = useRouter()
     const [fullName, setFullName] = useState("")
 
-    const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    // const supabase = createBrowserClient(
+    //     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    // )
+
+    const supabase = createClientComponentClient()
 
     return (
         <>
             <Dialog onOpenChange={setIsModalOpen} open={isModalgOpen}>
                 <DialogTrigger asChild>
-                    <div className={classname || 'rounded-full bg-white text-black px-4 py-2 w-full text-lg font-bold text-center cursor-pointer hover:bg-opacity-90 transition duration-200'}>
-                        Log in
-                    </div>
+                <div className='w-full flex flex-col gap-1'>
+                                <button className='w-full bg-primary text-white py-3 px-4 rounded-full text-sm font-semibold'>
+                                    Create account
+                                </button>
+                                <div className='text-[11px] py-1 text-gray-400'>By signing up, you agree to the
+                                    <span className='text-primary cursor-pointer'> Terms of Service</span> and <span className='text-primary cursor-pointer'> Privacy Policy</span>, including <span className='text-primary cursor-pointer'> Cookie Use</span>.</div>
+                            </div>
                 </DialogTrigger>
                 <DialogContent className="p-10 space-y-4 m-auto bg-black top-[50%] border-none text-white">
                     <div className="w-[75%] m-auto">
-                        <div className="flex flex-col items-start w-full gap-4">
+                        {/* <div className="flex flex-col items-start w-full gap-4">
                             <h3 className="text-white text-3xl">Sign in to X</h3>
                             <AuthButton />
                             <div className='w-full flex items-center justify-between gap-2'>
@@ -44,11 +44,11 @@ const LoginModal = ({ classname }: LoginModalProp) => {
                                 <p className="text-white text-sm">or</p>
                                 <div className='w-full border-2-white h-[1px] bg-gray-700'></div>
                             </div>
-                        </div>
+                        </div> */}
                         <form onSubmit={async (e) => {
                             e.preventDefault()
                             // check if the username already exists
-                            const { data, error } = await supabase
+                            const { data } = await supabase
                                 .from('profiles')
                                 .select()
                                 .eq('username', username.trim());

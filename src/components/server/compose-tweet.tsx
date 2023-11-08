@@ -1,17 +1,17 @@
-import { createServerClient } from "@supabase/ssr";
 import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
-import { SupabaseClient } from "@supabase/supabase-js";
 import FormTweet from "../client/form-tweet";
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db/index";
 import { tweets } from "@/lib/db/schema";
+import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
 interface IComposeTweet {
-    placeholder?: string
+    placeholder?: string,
+    userAvatar: string
 }
 
-const ComposeTweet = ({ placeholder }: IComposeTweet) => {
+const ComposeTweet = ({ placeholder, userAvatar }: IComposeTweet ) => {
     async function submitTweet(formData: FormData) {
         'use server';
 
@@ -19,39 +19,18 @@ const ComposeTweet = ({ placeholder }: IComposeTweet) => {
 
         if (!tweet) return
 
-        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-        const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY!
+        const supabase = createServerActionClient({ cookies })
 
-        new SupabaseClient(supabaseUrl, supabaseSecretKey)
-
-        if (!supabaseUrl || !supabaseSecretKey)
-            return { error: { message: "supabase credentials are not provided" } };
-
-        const cookieStore = cookies()
-        const supabase = createServerClient(
-            supabaseUrl,
-            supabaseSecretKey,
-            {
-                cookies: {
-                    get(name: string) {
-                        return cookieStore.get(name)?.value
-                    }
-                }
-            }
-        )
-
-        const { data: userData, error: userError } = await supabase.auth.getUser();
-
-        if (userError) {
-            throw userError
-        }
+        const { data: { user } } = await supabase.auth.getUser()
+        
+        if(!user) return
 
         const res = await db
             .insert(tweets)
             .values({
                 text: tweet.toString(),
                 id: randomUUID(),
-                profileId: userData.user.id
+                profileId: user.id
             })
             .returning()
             .catch(error => {
@@ -64,7 +43,9 @@ const ComposeTweet = ({ placeholder }: IComposeTweet) => {
     }
 
     return (
-        <FormTweet serverAction={submitTweet} placeholder={placeholder} />
+        <FormTweet
+        userAvatar={userAvatar}
+        serverAction={submitTweet} placeholder={placeholder} />
     )
 }
 
