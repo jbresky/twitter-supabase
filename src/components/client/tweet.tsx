@@ -21,7 +21,6 @@ export type TweetProps = {
   likesCount: number;
   hasLiked: boolean;
   repliesCount: number;
-  userAvatar?: string;
   isReply?: boolean
 }
 

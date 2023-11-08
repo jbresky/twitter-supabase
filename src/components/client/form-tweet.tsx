@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 import { toast } from "sonner"
 import ComposeButton from './compose-button'
+
 type FormClientProps = {
     serverAction?: any,
     placeholder?: string,
@@ -35,7 +36,6 @@ const FormTweet = ({ serverAction, placeholder, userAvatar }: FormClientProps) =
                     name="tweet"
                 />
                 <div className="w-full flex justify-end">
-                    {/* <div></div> */}
                         <ComposeButton />
                 </div>
             </div>

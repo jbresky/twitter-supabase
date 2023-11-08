@@ -59,7 +59,6 @@ const Posts = ({ posts, userAvatar }: IPosts) => {
                                 likesCount={likes.length}
                                 hasLiked={hasLiked}
                                 repliesCount={replies.length}
-                                userAvatar={userAvatar}
                             />
                         )
                     })
