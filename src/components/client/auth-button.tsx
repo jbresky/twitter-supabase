@@ -1,22 +1,23 @@
 'use client'
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { createBrowserClient } from '@supabase/ssr'
+import { createBrowserClient, createServerClient } from '@supabase/ssr'
 
 const AuthButton = () => {
 
-    const supabase = createBrowserClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    )
+    // const supabase = createServerClient(
+    //     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    // )
 
-    // const supabase = createClientComponentClient()
+    const supabase = createClientComponentClient()
 
     const handleSignIn = async () => {
         await supabase.auth.signInWithOAuth({
             provider: 'github',
             options: {
-                redirectTo: 'http://localhost:3000/auth/callback'
+                redirectTo: 'https://twix-clone.vercel.app/auth/callback',
+                // redirectTo: 'http://localhost:3000/auth/callback'
             }
         })
     }
