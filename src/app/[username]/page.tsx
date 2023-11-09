@@ -1,17 +1,17 @@
 import ProfileAvatar from "@/components/client/profile-avatar";
 import Tweet from "@/components/client/tweet";
 import { getTweets } from "@/lib/supabase/queries";
-import { createPagesBrowserClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { BiCalendar, BiLeftArrowAlt } from 'react-icons/bi'
 import { BsThreeDots } from 'react-icons/bs'
 import { FaRegEnvelope } from 'react-icons/fa'
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime"
-
-dayjs.extend(relativeTime)
 import LeftSidebar from "@/components/left-sidebar";
 import RightSection from "@/components/right-section";
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
+
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime"
+dayjs.extend(relativeTime)
 
 const UserProfilePage = async ({
   params,
@@ -19,11 +19,23 @@ const UserProfilePage = async ({
   params: { username: string };
 }) => {
 
-  const supabaseClient = createPagesBrowserClient();
+  const cookieStore = cookies()
 
-  const { data: { session } } = await supabaseClient.auth.getSession()
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+  )
 
-  const { data: userData } = await supabaseClient.auth.getUser();
+  const { data: { session } } = await supabase.auth.getSession()
+
+  const { data: userData } = await supabase.auth.getUser();
 
   const getUserTweets = await getTweets({
     currentUserID: userData.user?.id,

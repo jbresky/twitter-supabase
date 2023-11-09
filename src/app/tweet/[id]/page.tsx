@@ -1,4 +1,3 @@
-import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { getTweets } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 import { BsArrowLeft } from 'react-icons/bs'
@@ -6,13 +5,27 @@ import TweetId from "../tweet-id";
 import RightSection from "@/components/right-section";
 import LeftSidebar from "@/components/left-sidebar";
 import ReplyTweet from "@/components/client/reply-tweet";
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
-  const supabaseClient = createPagesBrowserClient();
+  const cookieStore = cookies()
 
-  const { data: userData } = await supabaseClient.auth.getUser();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+  )
 
-  const { data: { session } } = await supabaseClient.auth.getSession()
+  const { data: { session } } = await supabase.auth.getSession()
+
+  const { data: userData } = await supabase.auth.getUser();
 
   const tweet = await getTweets({
     currentUserID: userData.user?.id,
