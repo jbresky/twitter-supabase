@@ -1,5 +1,4 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { getTweets } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 import { BsArrowLeft } from 'react-icons/bs'
@@ -9,9 +8,7 @@ import LeftSidebar from "@/components/left-sidebar";
 import ReplyTweet from "@/components/client/reply-tweet";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
-  const supabaseClient = createServerComponentClient({
-    cookies,
-  });
+  const supabaseClient = createPagesBrowserClient();
 
   const { data: userData } = await supabaseClient.auth.getUser();
 

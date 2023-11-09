@@ -1,7 +1,7 @@
 import ProfileAvatar from "@/components/client/profile-avatar";
 import Tweet from "@/components/client/tweet";
 import { getTweets } from "@/lib/supabase/queries";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createPagesBrowserClient, createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { BiCalendar, BiLeftArrowAlt } from 'react-icons/bi'
 import { BsThreeDots } from 'react-icons/bs'
@@ -18,9 +18,8 @@ const UserProfilePage = async ({
 }: {
   params: { username: string };
 }) => {
-  const supabaseClient = createServerComponentClient({
-    cookies,
-  });
+
+  const supabaseClient = createPagesBrowserClient();
 
   const { data: { session } } = await supabaseClient.auth.getSession()
 
