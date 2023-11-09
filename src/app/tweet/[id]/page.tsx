@@ -1,7 +1,7 @@
 import { getTweets } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
 import { BsArrowLeft } from 'react-icons/bs'
-import TweetId from "../tweet-id";
+import TweetId from "@/components/client/tweet-id";
 import RightSection from "@/components/right-section";
 import LeftSidebar from "@/components/left-sidebar";
 import ReplyTweet from "@/components/client/reply-tweet";
@@ -9,42 +9,42 @@ import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
-  // const cookieStore = cookies()
+  const cookieStore = cookies()
 
-  // const supabase = createServerClient(
-  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  //   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  //   {
-  //     cookies: {
-  //       get(name: string) {
-  //         return cookieStore.get(name)?.value
-  //       }
-  //     }
-  //   }
-  // )
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+  )
 
-  // const { data: { session } } = await supabase.auth.getSession()
+  const { data: { session } } = await supabase.auth.getSession()
 
-  // const { data: userData } = await supabase.auth.getUser();
+  const { data: userData } = await supabase.auth.getUser();
 
-  // const tweet = await getTweets({
-  //   currentUserID: userData.user?.id,
-  //   getSingleTweetId: params.id,
-  // });  
+  const tweet = await getTweets({
+    currentUserID: userData.user?.id,
+    getSingleTweetId: params.id,
+  });  
 
-  // if (!tweet) {
-  //   redirect("/");
-  // }
+  if (!tweet) {
+    redirect("/login");
+  }
 
-  // const repliesRes = await getTweets({
-  //   currentUserID: userData.user?.id,
-  //   orderBy: true,
-  //   replyId: tweet[0].tweet.id,
-  // });
+  const repliesRes = await getTweets({
+    currentUserID: userData.user?.id,
+    orderBy: true,
+    replyId: tweet[0].tweet.id,
+  });
 
   return (
     <>
-      {/* <LeftSidebar session={session} />
+      <LeftSidebar session={session} />
       <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
         <div className="flex items-center py-3 px-3 gap-8">
           <BsArrowLeft className="text-2xl" />
@@ -87,7 +87,7 @@ const TweetPage = async ({ params }: { params: { id: string } }) => {
             );
           })}
       </main>
-      <RightSection /> */}
+      <RightSection />
     </>
   );
 };

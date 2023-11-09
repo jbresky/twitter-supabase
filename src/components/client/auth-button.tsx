@@ -1,15 +1,8 @@
 'use client'
 
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { createBrowserClient, createServerClient } from '@supabase/ssr'
 
 const AuthButton = () => {
-
-    // const supabase = createServerClient(
-    //     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    //     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-    // )
-
     const supabase = createClientComponentClient()
 
     const handleSignIn = async () => {
