@@ -30,8 +30,7 @@ export async function GET(request: Request) {
 
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     if (!error) {
-      // return NextResponse.redirect(new URL(`/${next.slice(1)}`, request.url))
-      return NextResponse.redirect('https://twix-clone.vercel.app/')
+      return NextResponse.redirect(new URL(`/${next.slice(1)}`, request.url))
     }
   }
 
