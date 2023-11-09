@@ -22,7 +22,7 @@ const ProfileAvatar = ({
 }: ProfileAvatarProps) => {
   const [profileImage, setProfileImage] = useState("");
 
-  const supabase  = createPagesBrowserClient();
+  const supabase = createPagesBrowserClient();
 
   let [isMutationLoading, startTransition] = useTransition();
 
@@ -71,9 +71,9 @@ const ProfileAvatar = ({
   }, [profileImage]);
 
   return (
-    <div>
+    // <div>
       <div className="relative w-fit">
-        {!isOnTimeline && (
+        {/* {!isOnTimeline && (
           <input
             type="file"
             name="user-avatar"
@@ -87,7 +87,7 @@ const ProfileAvatar = ({
         <label
           htmlFor={isOnTimeline ? "" : "user-avatar"}
           className={!isOnTimeline ? "cursor-pointer" : ""}
-        >
+        > */}
           <Avatar className={width || "w-10 h-10"}>
             {profileImage !== "" ? (
               <AvatarImage
@@ -108,8 +108,8 @@ const ProfileAvatar = ({
                 : ""}
             </AvatarFallback>
           </Avatar>
-        </label>
-      </div>
+        {/* </label> */}
+      {/* </div> */}
     </div>
   );
 };

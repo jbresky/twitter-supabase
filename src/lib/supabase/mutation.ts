@@ -47,7 +47,7 @@ export const reply = async ({
   userId,
   replyText,
 }: {
-  tweetId: string;
+  tweetId?: string;
   userId: string;
   replyText: string;
 }) => {
@@ -62,7 +62,7 @@ export const reply = async ({
     replyId: tweetId,
   });
 
-  revalidatePath(`/tweet/[id]`);
+  revalidatePath(`/`);
 };
 
 export const saveNewAvatar = async ({
