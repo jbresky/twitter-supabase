@@ -44,10 +44,10 @@ const UserProfilePage = async ({
 
   return (
     <>
-      <LeftSidebar session={session} />
+      {/* <LeftSidebar session={session} /> */}
 
       <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
-        <div className="flex items-center pb-[2px] pt-1 px-3 gap-7 backdrop-blur sticky top-0 z-10">
+        {/* <div className="flex items-center pb-[2px] pt-1 px-3 gap-7 backdrop-blur sticky top-0 z-10">
           <BiLeftArrowAlt className="text-2xl" />
           <div className="flex flex-col">
             <h1 className="font-semibold">{getUserTweets ? getUserTweets[0].profile.fullName : null}</h1>
@@ -119,7 +119,7 @@ const UserProfilePage = async ({
                 />
               );
             })}
-        </div>
+        </div> */}
       </main>
       <RightSection />
     </>

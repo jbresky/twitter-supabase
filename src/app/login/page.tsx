@@ -2,9 +2,9 @@ import { RiTwitterXFill } from 'react-icons/ri'
 import Link from 'next/link'
 import AuthButton from '@/components/client/auth-button'
 import LoginModal from '@/components/client/login-modal'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+// import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+// import { cookies } from 'next/headers'
+// import { redirect } from 'next/navigation'
 
 const footer = [
     {
@@ -41,15 +41,15 @@ const footer = [
     }
 ]
 
-const Login = async () => {
+const Login = () => {
 
-    const supabase = createServerComponentClient({ cookies })
+    // const supabase = createServerComponentClient({ cookies })
 
-    const { data: { session } } = await supabase.auth.getSession()
+    // const { data: { session } } = await supabase.auth.getSession()
   
-    if (session !== null) {
-      redirect('/')
-    }
+    // if (session !== null) {
+    //   redirect('/')
+    // }
 
     return (
         <>

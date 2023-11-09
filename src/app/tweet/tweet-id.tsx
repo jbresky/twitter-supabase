@@ -24,7 +24,7 @@ const TweetId = ({
 
     return (
         <>
-            <div
+            {/* <div
                 key={tweet.tweetDetails.id}
                 className={`w-full ${isReply ? `pt-3 pb-1` : `py-3`} px-3 flex flex-col gap-3 cursor-pointer`}
             >
@@ -115,7 +115,6 @@ const TweetId = ({
                     )}
 
 
-                    {/* date */}
                     {!isReply && (
                         <div className="pb-2 flex items-center text-[#71767B] text-sm">
                             <p>
@@ -159,7 +158,7 @@ const TweetId = ({
                         </div>
                     )}
                 </div>
-            </div>
+            </div> */}
 
         </>
     );

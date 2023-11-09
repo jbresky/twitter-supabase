@@ -7,7 +7,7 @@ import { AiOutlineRetweet } from "react-icons/ai"
 import { IoStatsChart, IoShareOutline } from "react-icons/io5"
 import { Profile, Tweet } from "@/lib/db/schema";
 import LikeButton from "./like-button"
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 import ReplyDialog from "./reply-dialog"
 
 dayjs.extend(relativeTime)
@@ -31,7 +31,7 @@ const Tweet = ({
   repliesCount,
 }: TweetProps) => {
 
-  const router = useRouter()
+  // const router = useRouter()
 
   return (
     <>
@@ -48,7 +48,7 @@ const Tweet = ({
           <div className="w-full flex items-center justify-between">
 
             <div
-              onClick={() => router.push(`/${tweet.userProfile.username}`)}
+              // onClick={() => router.push(`/${tweet.userProfile.username}`)}
               className="flex items-center max-xsm:flex-col max-sm:items-start">
               <p className="font-bold hover:underline cursor-pointer pr-1">{tweet.userProfile.fullName ?? ""}</p>
               <div className="flex items-center">
@@ -68,9 +68,9 @@ const Tweet = ({
           </div>
 
           <div className="w-full text-base"
-            onClick={() => {
-              router.push(`/tweet/${tweet.tweetDetails.id}`)
-            }}
+            // onClick={() => {
+            //   router.push(`/tweet/${tweet.tweetDetails.id}`)
+            // }}
           >
             {tweet.tweetDetails.text}
           </div>
