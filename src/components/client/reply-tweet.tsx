@@ -4,7 +4,6 @@ import { useState, useTransition } from "react";
 import { reply } from "@/lib/supabase/mutation";
 import { createPagesBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
-import { Tweet } from "@/lib/db/schema";
 
 // replying tweet on /tweet/id instead on dialog
 interface ReplyTweetProps {

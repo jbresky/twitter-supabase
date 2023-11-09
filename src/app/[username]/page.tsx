@@ -105,7 +105,6 @@ const UserProfilePage = async ({
                   currentUserId={userData.user?.id}
                   hasLiked={hasLiked}
                   repliesCount={replies.length}
-                  userAvatar={session?.user.user_metadata.avatar_url}
                 />
               );
             })}

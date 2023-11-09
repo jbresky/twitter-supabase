@@ -52,7 +52,6 @@ const TweetPage = async ({ params }: { params: { id: string } }) => {
               }}
               currentUserId={userData.user?.id}
               repliesCount={tweet[0].replies.length}
-              userAvatar={session?.user.user_metadata.avatar_url}
             />
             <ReplyTweet id={params.id} userAvatar={session?.user.user_metadata.avatar_url} />
           </>
