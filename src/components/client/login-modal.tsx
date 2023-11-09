@@ -65,7 +65,8 @@ const LoginModal = () => {
                                             username,
                                             full_name: fullName
                                         },
-                                        emailRedirectTo: 'http://localhost:3000/auth/callback'
+                                        // emailRedirectTo: 'http://localhost:3000/auth/callback'
+                                        emailRedirectTo: 'https://twix-clone.vercel.app/auth/callback'
                                     }
                                 })
 
