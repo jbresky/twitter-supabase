@@ -7,24 +7,23 @@ import LeftSidebar from '@/components/left-sidebar'
 import RightSection from '@/components/right-section'
 import ComposeTweet from "@/components/server/compose-tweet";
 import { redirect } from "next/navigation";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Home = async () => {
 
-  // const cookieStore = cookies()
-  const supabaseServer = createServerComponentClient({ cookies })
+  const cookieStore = cookies()
+  // const supabaseServer = createServerComponentClient({ cookies })
 
-  // const supabaseServer = createServerClient(
-  //   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  //   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  //   {
-  //     cookies: {
-  //       get(name: string) {
-  //         return cookieStore.get(name)?.value
-  //       }
-  //     }
-  //   }
-  // )
+  const supabaseServer = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value
+        }
+      }
+    }
+  )
 
   const { data: userData } = await supabaseServer.auth.getUser()
   const { data: { session } } = await supabaseServer.auth.getSession()
