@@ -9,8 +9,8 @@ const AuthButton = () => {
         await supabase.auth.signInWithOAuth({
             provider: 'github',
             options: {
-                redirectTo: 'https://twix-clone.vercel.app/auth/callback',
-                // redirectTo: 'http://localhost:3000/auth/callback'
+                // redirectTo: 'https://twix-clone.vercel.app/auth/callback',
+                redirectTo: 'http://localhost:3000/auth/callback'
             }
         })
     }

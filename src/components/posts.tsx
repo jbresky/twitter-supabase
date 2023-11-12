@@ -1,7 +1,6 @@
 'use client'
 
 import { AiOutlineSetting } from "react-icons/ai";
-import { RiTwitterXFill } from "react-icons/ri";
 import Tweet from "./client/tweet";
 
 interface IPosts {
@@ -13,24 +12,26 @@ const Posts = ({ posts, userAvatar }: IPosts) => {
     return (
         <>
             {/* mobile header */}
-            <header className="w-full flex flex-col md:hidden border-b-1 border-gray-500 pt-4 z-10">
-                <div className="flex justify-between items-center px-4">
-                    <img className='rounded-full w-10 h-10' src={userAvatar || '/images/next.jpg'} />
-                    <RiTwitterXFill className="w-10 h-6" />
-                    <AiOutlineSetting className="w-10 h-6" />
+            <header className="w-full flex flex-col xsm:hidden border-b-1 border-gray-500 pt-2 z-10">
+                <div className="flex justify-between items-center px-3">
+                    <div className="flex items-center">
+                        <img className='rounded-full w-8 h-8' src={userAvatar || '/images/next.jpg'} />
+                        <h1 className="text-xl font-bold p-4 backdrop-blur bg-black/10 sticky top-0 z-10 max-2xsm:hidden">Home</h1>
+                    </div>
+                <AiOutlineSetting className="w-10 h-6" />
                 </div>
-                <div className="flex mx-auto gap-12 mt-4">
+                <div className="flex justify-around mt-4">
                     <div className="h-10 flex flex-col gap-[14px]">
                         <h2 className="font-semibold text-[#e7e9ea]">For you</h2>
-                        <div className='w-full rounded-xl border-b-8-primary h-[6px] bg-primary'></div>
+                        <div className='w-full rounded-xl border-b-8-primary h-[12px] bg-primary'></div>
                     </div>
                     <div className="">
                         <h2 className="font-semibold text-[#71767b]">Following</h2>
                     </div>
                 </div>
-                <div className="w-full text-center py-4 border-t-[0.5px] border-[#71767b]">
+                {/* <div className="w-full text-center py-3 border-t-[0.5px] border-gray-700">
                     <span className="text-primary">Show 220 posts</span>
-                </div>
+                </div> */}
             </header>
             {/* mobile header */}
 

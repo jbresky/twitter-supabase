@@ -34,12 +34,11 @@ const TweetId = ({
                         <div className="w-full flex space-x-4">
                             <div>
                                 <img className='rounded-full w-10 h-10' src={tweet.userProfile.avatarUrl || '/images/next.jpg'} />
-
                             </div>
                             <div className="flex flex-col w-full gap-1">
                                 <div className="flex items-start w-full justify-between">
                                     <div className="w-full flex items-start justify-between">
-                                        <div className="w-full flex items-center max-2xsm:flex-col max-2xsm:items-start"
+                                        <div className="w-full flex items-center gap-1 max-2xsm:flex-col max-2xsm:items-start"
                                          onClick={() => router.push(`/${tweet.userProfile.username}`)}
                                         >
                                             <div className="font-bold">
@@ -128,14 +127,14 @@ const TweetId = ({
                     )}
 
                     {tweet.userProfile.id === tweet.tweetDetails.profileId && !isReply ? (
-                        <div className="w-full text-sm py-3 flex items-center gap-4 border-t-[0.5px] border-[#71767B] text-[#71767B]">
+                        <div className="w-full text-sm py-3 flex items-center gap-4 border-t-[0.5px] border-gray-700 text-[#71767B]">
                             <IoStatsChart />
                             <p>View post engagements</p>
                         </div>
                     ) : null}
 
                     {!isReply && (
-                        <div className={`flex items-center w-full justify-between text-[#71767B] py-3 px-1 border-b-[0.5px] border-t-[0.5px] border-gray-600 text-lg`}>
+                        <div className={`flex items-center w-full justify-between text-[#71767B] py-3 px-1 border-b-[0.5px] border-t-[0.5px] border-gray-700 text-lg`}>
                             <div className="flex items-center hover:text-blue-500 cursor-pointer">
                                 <ReplyDialog tweet={tweet} repliesCount={repliesCount} />
                             </div>

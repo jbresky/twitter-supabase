@@ -7,6 +7,7 @@ import LeftSidebar from "@/components/left-sidebar";
 import ReplyTweet from "@/components/client/reply-tweet";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import { Toaster } from "sonner";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies()
@@ -30,7 +31,7 @@ const TweetPage = async ({ params }: { params: { id: string } }) => {
   const tweet = await getTweets({
     currentUserID: userData.user?.id,
     getSingleTweetId: params.id,
-  });  
+  });
 
   if (!tweet) {
     redirect("/login");
@@ -44,6 +45,7 @@ const TweetPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <>
+      <Toaster />
       <LeftSidebar session={session} />
       <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
         <div className="flex items-center py-3 px-3 gap-8">
