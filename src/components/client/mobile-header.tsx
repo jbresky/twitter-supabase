@@ -1,5 +1,5 @@
 import { AiOutlineSetting, AiOutlineUserAdd } from "react-icons/ai";
-import { BsBookmark, BsThreeDots, BsPeople } from 'react-icons/bs'
+import { BsBookmark, BsPeople } from 'react-icons/bs'
 import { FaMoneyBills } from 'react-icons/fa6'
 import { RiTwitterXFill, RiBook2Line } from 'react-icons/ri'
 import { MdAdd } from 'react-icons/md'
@@ -42,7 +42,8 @@ const NAVIGATION_ITEMS = [
 
 
 const MobileHeader = ({ session }: { session: Session }) => {
-    return (<>
+    return (
+    <>
         <header className="w-full flex flex-col xsm:hidden border-b-1 border-gray-500 pt-2 z-10">
             <div className="flex justify-between items-center px-3">
                 <div className="flex items-center">
