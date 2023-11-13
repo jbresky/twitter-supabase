@@ -32,7 +32,7 @@ const ReplyDialog = ({ tweet, repliesCount }: ReplyDialogProps) => {
     return (
         <Dialog onOpenChange={setIsReplyDialogOpen} open={isReplyDialogOpen}>
             <DialogTrigger asChild>
-                <button className="rounded-full text-[#71767B] flex items-center space-x-2 outline-none hover:text-blue-500 transition duration-200 cursor-pointer">
+                <button className="rounded-full text-[#71767B] flex items-center space-x-2 outline-none hover:text-primary transition duration-200 cursor-pointer">
                     <BsChat />
                     <span className="text-sm">{repliesCount == 0 ? '' : repliesCount}</span>
                 </button>
