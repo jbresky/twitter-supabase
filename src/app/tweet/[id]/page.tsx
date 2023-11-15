@@ -1,6 +1,5 @@
 import { getTweets } from "@/lib/supabase/queries";
 import { redirect } from "next/navigation";
-import { BsArrowLeft } from 'react-icons/bs'
 import TweetId from "@/components/client/tweet-id";
 import RightSection from "@/components/right-section";
 import LeftSidebar from "@/components/left-sidebar";
@@ -8,6 +7,8 @@ import ReplyTweet from "@/components/client/reply-tweet";
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 import { Toaster } from "sonner";
+import Logout from "@/components/client/logout";
+import RouterBack from "@/components/client/router-back";
 
 const TweetPage = async ({ params }: { params: { id: string } }) => {
   const cookieStore = cookies()
@@ -46,13 +47,15 @@ const TweetPage = async ({ params }: { params: { id: string } }) => {
   return (
     <>
       <Toaster />
-      <LeftSidebar session={session} />
+      <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex justify-between flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto overflow-x-hidden hidden">
+        <LeftSidebar session={session} />
+        <Logout session={session} />
+      </section>
       <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
         <div className="flex items-center py-3 px-3 gap-8">
-          <BsArrowLeft className="text-2xl" />
+          <RouterBack />
           <h1 className="text-xl font-semibold">Post</h1>
-        </div>
-
+        </div> 
         {tweet ? (
           <>
             <TweetId

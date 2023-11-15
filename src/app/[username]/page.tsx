@@ -1,7 +1,7 @@
 import ProfileAvatar from "@/components/client/profile-avatar";
 import Tweet from "@/components/client/tweet";
 import { getTweets } from "@/lib/supabase/queries";
-import { BiCalendar, BiLeftArrowAlt } from 'react-icons/bi'
+import { BiCalendar } from 'react-icons/bi'
 import { BsThreeDots } from 'react-icons/bs'
 import { FaRegEnvelope } from 'react-icons/fa'
 import LeftSidebar from "@/components/left-sidebar";
@@ -11,6 +11,8 @@ import { createServerClient } from "@supabase/ssr";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
+import Logout from "@/components/client/logout";
+import RouterBack from "@/components/client/router-back";
 dayjs.extend(relativeTime)
 
 const UserProfilePage = async ({
@@ -44,11 +46,13 @@ const UserProfilePage = async ({
 
   return (
     <>
-      <LeftSidebar session={session} />
-
+      <section className="2xl:w-[275px] sticky top-0 left-0 h-screen xsm:flex justify-between flex-col items-end 2xl:items-start px-4 pb-2 overflow-y-auto overflow-x-hidden hidden">
+        <LeftSidebar session={session} />
+        <Logout session={session} />
+      </section>
       <main className="flex w-full max-w-[600px] min-h-screen flex-col border-l-[0.5px] border-r-[0.5px] border-gray-600">
         <div className="flex items-center pb-[2px] pt-1 px-3 gap-7 backdrop-blur sticky top-0 z-10">
-          <BiLeftArrowAlt className="text-2xl" />
+          <RouterBack />
           <div className="flex flex-col">
             <h1 className="font-semibold">{getUserTweets ? getUserTweets[0].profile.fullName : null}</h1>
             <p className="text-gray-500 text-[13px]">{getUserTweets?.length || 0} posts </p>
