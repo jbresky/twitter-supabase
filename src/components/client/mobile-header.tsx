@@ -41,7 +41,7 @@ const NAVIGATION_ITEMS = [
 ]
 
 
-const MobileHeader = ({ session }: { session: Session }) => {
+const MobileHeader = ({ session }: { session?: Session | null }) => {
     return (
     <>
         <header className="w-full flex flex-col xsm:hidden border-b-1 border-gray-500 pt-2 z-10">

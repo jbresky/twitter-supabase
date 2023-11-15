@@ -6,7 +6,7 @@ import Tweet from "./client/tweet";
 
 interface IPosts {
     posts: any,
-    session: Session
+    session?: Session | null
 }
 
 const Posts = ({ posts, session }: IPosts) => {

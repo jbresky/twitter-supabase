@@ -31,10 +31,6 @@ const Home = async () => {
 
   const posts = await getTweets({ currentUserID: userData.user?.id })
 
-  if (session === null) {
-    redirect('/login')
-  }
-
   return (
     <>
       <Toaster />
